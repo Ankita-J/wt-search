@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>wt-header test</title>
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../wt-search.html">
+   
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <wt-header></wt-header>
+      
+      </template>
+    </test-fixture>
+
+    <script>
+     suite('wt-header', function() {
+      
+        test('instantiating the element works', function() {
+            var element = fixture('basic');
+            assert.equal(element.is, 'wt-header');
+         
+          });
+              
+//        var header;
+//        setup(function() {
+//          header = fixture('basic');
+//        });
+       
+//        test("logo Url appearing", function(){
+//          assert.equal(header.logoUrl, 'https://www.waiin.com/wp-content/uploads/2016/04/waiin@1x2-1.png');
+//        })
+//         test("Icon on toolbar appearing", function(){
+//          assert.equal(header.container, 'search');
+//        })
+      
+//  suite('selected attributes', function() {
+
+//       var s;
+  
+//       setup(function () {
+//         s = fixture('test');
+//       });
+
+    //   test('custom selectedAttribute', function() {
+    //     // set selectedAttribute
+    //     s.selectedAttribute = 'myattr';
+    //     // check selected attribute (should not be there)
+    //     assert.isFalse(s.children[4].hasAttribute('myattr'));
+    //     // set selected
+    //     s.selected = 4;
+    //     // now selected attribute should be there
+    //     assert.isTrue(s.children[4].hasAttribute('myattr'));
+    //   });
+
+    // });
+
+    // suite('changing attrForSelected', function() {
+
+    //   var s;
+
+    //   setup(function () {
+    //     s = fixture('test-attr-change');
+    //   });
+
+    //   test('changing selectedAttribute', function() {
+    //     Polymer.dom.flush();
+    //     s.attrForSelected = 'data-y';
+    //     assert.equal(s.selected, 'y-1');
+    //   });
+
+    // });
+
+    // suite('changing attrForSelected in multi', function() {
+
+    //   var s;
+
+    //   setup(function () {
+    //     s = fixture('test-attr-change-multi');
+    //   });
+
+    //   test('changing selectedAttribute', function() {
+    //     Polymer.dom.flush();
+    //     s.attrForSelected = 'data-y';
+    //     assert.equal(s.selectedValues.length, 2);
+    //     assert.equal(s.selectedValues[0],'y-1');
+    //     assert.equal(s.selectedValues[1],'y-2');
+    //   });
+       })
+     
+
+
+    </script>
+  </body>
+</html>

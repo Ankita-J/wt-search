@@ -1,0 +1,211 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="bower_components/iron-form/iron-form.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="bower_components/paper-item/paper-item.html">
+
+<dom-module id="choice-form">
+    <template>
+        <style> 
+        :host {
+    display: block;
+  }  
+  #Adult
+  {
+       width:100px;
+      float:left;
+      
+      
+  }
+  .childs{
+        width:100px;
+        margin-left:110px;
+       float:clear;
+     }
+     .childs1{
+      width:100px;
+       float:left;
+     }
+  .childs2{
+      width:100px; 
+      margin-left:110px;
+  }
+  .childs3{
+      width:100px;
+     
+  }
+  #size{
+      font-size: 10px;
+  }
+  </style>
+
+        <form is="iron-form" id="form" method="post" action="/form/handler">
+        <div id="Adult">
+        <paper-dropdown-menu label="Adults" id="adult" class="inputAdultCount" >
+            <paper-listbox class="dropdown-content" selected="{{countAdult}}">
+                <paper-item>1</paper-item>
+                <paper-item>2</paper-item>
+                <paper-item>3</paper-item>
+                <paper-item>4</paper-item>
+                <paper-item>5</paper-item>
+            </paper-listbox>
+        </paper-dropdown-menu>
+        <div id="size">(12+ Year)</div>
+        <input is="iron-input" type="hidden" bind-value="[[countAdult]]">
+        </div>
+
+        <div class="childs">
+        <paper-dropdown-menu label="children" id="child{{getID()}}" on-iron-select='addChild' class="inputChildCount">
+            <paper-listbox class="dropdown-content" selected="{{countChildren}}">
+                <paper-item>0</paper-item>
+                <paper-item>1</paper-item>
+                <paper-item>2</paper-item>
+                <paper-item>3</paper-item>
+            </paper-listbox>
+        </paper-dropdown-menu>
+        <div id="size">(0-11 Year)</div>
+        <input is="iron-input" type="hidden" bind-value="[[countChildren]]">
+        </div>        
+       
+         <template is='dom-repeat' items='{{ childrenC }}'>           
+
+           <div class="childs1">
+           {{ item.child }}
+         <paper-dropdown-menu label="Child{{ childIndex() }} " id="child1"  hidden$="{{show}}">
+            <paper-listbox class="dropdown-content">
+               
+                <paper-item>1</paper-item>
+                <paper-item>2</paper-item>
+                <paper-item>3</paper-item>
+                <paper-item>4</paper-item>
+                <paper-item>5</paper-item>
+                <paper-item>6</paper-item>
+                <paper-item>7</paper-item>
+                <paper-item>8</paper-item>
+                <paper-item>9</paper-item>
+                <paper-item>10</paper-item>
+                <paper-item>11</paper-item>
+                <paper-item>12</paper-item>
+            </paper-listbox>
+        </paper-dropdown-menu>  
+        </div>    
+</template>
+        <!--</template>-->
+<!--           
+          <div class="childs2">
+         <paper-dropdown-menu label="child 2" hidden$="{{show1}}" id="child2">
+            <paper-listbox class="dropdown-content">
+                <paper-item>1</paper-item>
+                <paper-item>2</paper-item>
+                <paper-item>3</paper-item>
+                <paper-item>4</paper-item>
+                <paper-item>5</paper-item>
+                <paper-item>6</paper-item>
+                <paper-item>7</paper-item>
+                <paper-item>8</paper-item>
+                <paper-item>9</paper-item>
+                <paper-item>10</paper-item>
+                <paper-item>11</paper-item>
+                <paper-item>12</paper-item>
+            </paper-listbox>
+        </paper-dropdown-menu>
+          </div>
+                    <div class="childs3">
+         <paper-dropdown-menu label="child 3" hidden$="{{show2}}" id="child3">
+            <paper-listbox class="dropdown-content">
+                <paper-item>1</paper-item>
+                <paper-item>2</paper-item>
+                <paper-item>3</paper-item>
+                <paper-item>4</paper-item>
+                <paper-item>5</paper-item>
+                <paper-item>6</paper-item>
+                <paper-item>7</paper-item>
+                <paper-item>8</paper-item>
+                <paper-item>9</paper-item>
+                <paper-item>10</paper-item>
+                <paper-item>11</paper-item>
+                <paper-item>12</paper-item>
+            </paper-listbox>
+        </paper-dropdown-menu>
+                    </div>-->
+        </form>
+
+       
+
+    </template>
+    <script>
+    Polymer({
+        is: 'choice-form',
+        properties:{
+          childrenC: {
+                type: Array,
+                notify: true
+            },              
+          countAdult: {
+              type: Number,
+             // value: '1'
+            //   observer: '_oncount'
+          },
+          countChildren: {
+              type: Number,
+             // value: 0
+          },
+          show: {
+              type: Boolean,
+              value: true,
+          },
+          show1: {
+              type: Boolean,
+              value: true,
+          },
+          show2: {
+              type: Boolean,
+              value: true,
+          },         
+        },
+         
+    //     getID: function(){
+    //        // alert(this.currentIndex);
+    //   var dropdownChildCount = document.getElementById("#count");
+
+        //   return dropdownChildCount;
+        // },
+        childIndex: function() {
+             this.childInputIndex = this.childInputIndex + 1;
+             return this.childInputIndex;             
+        },
+        addChild: function () {
+            alert('hello');
+            this.push('childrenC', { child: "" });            
+        },
+        
+       onCount: function () {
+         //  this.push('children', { child: "" });         
+           var child = document.querySelector("#child{{getID()}}");
+           
+               
+        //       this.show = true;
+         //      this.show1 = true;
+           //    this.show2 = true;
+           if(child.value === "1")
+           {               
+               this.show = false;
+           }
+           else if(child.value === "2")
+           {
+               this.show = false;
+               this.show1 = false;  
+           }
+           else if(child.value === "3")
+           {
+               this.show = false;
+               this.show1 = false;
+               this.show2 = false;
+           }
+        } 
+    });
+    </script>
+</dom-module>

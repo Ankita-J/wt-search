@@ -1,0 +1,117 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="bower_components/paper-item/paper-item.html">
+<link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="choice-form.html">
+
+<dom-module id="choice-card">
+    <template>
+        <style> 
+        :host {
+            display: block;
+        }  
+        .button{
+        padding-left: 20px;    
+        }
+        #line{
+            width:100%;
+    border-bottom: 1px solid black;
+    height:12px;        
+    margin: 5px 0 10px 0;
+}
+#line span{
+background-color:white;
+padding:10px;
+font-size:16px;
+
+}
+      
+      </style>
+
+<paper-material style="background-color: whitesmoke; width: 600px">
+  <form is="iron-form" id="form" method="post" action="/form/handler">
+    <template is='dom-repeat' items='{{ rooms }}'>
+        <paper-item >          
+           <div id="line"><span>Room# {{displayIndex()}}</span></div>  
+           <paper-button toggles class=button on-click="deleteRoom" id="d{{getIndex()}}"><img src="trash.png" height="30px" width= "30px"></paper-button>                 
+        </paper-item>
+        <choice-form>{{ item.room }}</choice-form>
+    </template>
+  </form>
+  <div class="buttons" style="color: #39B7CD">
+  <paper-button toggles on-click='addRoom'>Add Room</paper-button>
+  <paper-button toggles on-click='doneRoom'>Done</paper-button>
+  </div>
+</paper-material>
+
+</template>
+<script>
+var index = 1 ;
+    Polymer({
+        is: 'choice-card',
+        properties: {
+            rooms: {
+                type: Array,
+                notify: true
+            },   
+             currentIndex: {
+                 type: Number,
+                 value: 0
+             }
+
+        },
+        ready: function () {
+            this.rooms = [];
+           
+        },
+        addRoom: function () {
+            this.push('rooms', { room: "" });            
+        },
+        displayIndex: function() {
+             this.currentIndex = this.currentIndex + 1;
+             return this.currentIndex;
+             
+        },
+        getIndex: function(){
+           // alert(this.currentIndex);
+          return this.currentIndex;
+        },
+        deleteRoom: function (e) {
+            // alert(this.currentIndex);
+            this.splice('rooms', e.model.index, 1);
+        },
+        
+
+        doneRoom: function () {
+            var inputAdultCount = document.getElementsByClassName("inputAdultCount");
+            var inputChildCount = document.getElementsByClassName("inputChildCount");
+            var dataAdult = [];
+            var dataChild = [];
+            var adultCount = 0;
+            var childCount = 0;
+            var roomCount = this.currentIndex;
+            for (var i = 0; i < inputAdultCount.length; i++) { // loop through each input on the page
+                dataAdult[i] = inputAdultCount[i].value;
+                adultCount = +adultCount + +dataAdult[i];
+            }
+            var inputAdult = JSON.stringify(adultCount);
+            
+            for (var i = 0; i < inputChildCount.length; i++) { // loop through each input on the page
+                dataChild[i] = inputChildCount[i].value;
+                childCount = +childCount + +dataChild[i];
+            }
+            var inputChild = JSON.stringify(childCount);
+                        
+           
+            alert(inputAdult  + '  Adults' + ' ,  ' +  inputChild + '  Children  in ' + roomCount + ' rooms');
+            return false;  // stop form from posting
+        },
+
+
+    });
+</script>
+</dom-module>

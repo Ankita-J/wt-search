@@ -1,0 +1,36 @@
+{
+  "name": "t-autosuggest",
+  
+ 
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  
+ 
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "iron-dropdown": "PolymerElements/iron-dropdown#^1.0.5",
+    "iron-icons": "PolymerElements/iron-icons#^1.0.3",
+  
+    "paper-material": "PolymerElements/paper-material#^1.0.2",
+  
+    "polymer": "Polymer/polymer#^1.4.0",
+    "paper-spinner": "PolymerElements/paper-spinner#^1.2.1",
+     "paper-s": "PolymerElements/paper-spinner#^1.2.1"
+    
+
+  },
+  "devDependencies": {
+    "web-component-tester": "*",
+    "webcomponentsjs": "^0.7.14",
+     "iron-component-page": "PolymerElements/iron-component-page#^1.0.6",
+    "t-mystique-auth": "travelnxtelements/t-mystique-auth#^1.0.2"
+    
+  }
+}

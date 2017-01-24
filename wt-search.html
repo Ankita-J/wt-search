@@ -1,0 +1,532 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="bower_components/iron-form/iron-form.html">
+<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="bower_components/paper-item/paper-item.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/paper-material/paper-material.html">
+<link rel="import" href="bower_components/paper-card/paper-card.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="bower_components/paper-input/paper-input-container.html">
+<link rel="import" href="bower_components/paper-search-input/paper-search-input.html">
+<link rel="import" href="bower_components/vaadin-date-picker/vaadin-date-picker.html">
+<link rel="import" href="bower_components/vaadin-date-picker/vaadin-date-picker-light.html">
+<link rel="stylesheet" href="bower_components/w3c/w3.css">
+<link rel="import" href="choice-card.html">
+<link rel="import" href="choice-form.html">
+
+
+
+<dom-module id="wt-search">
+  <template>
+    <style is="custom-style">
+      :host{
+        display : block;
+       padding :0px;
+       margin : 0px;
+      }
+      app-toolbar{
+        background-color: #424d51;
+        height: 100px;
+      }  
+      paper-input{
+        --paper-input-container-focus-color: lightgray;
+         --paper-input-container-color: lightgray;
+          --paper-input-container-input-color: white;
+          font-size: small;
+          
+      }
+      paper-card{
+        /*padding-left:400px;*/
+        margin-left: 800px;
+        height: 400;
+        background-color: snow;
+      }
+     
+     
+  paper-dropdown-menu.input {
+    --paper-input-container-label: {
+      color:lightgray;
+     font-weight: 20px;
+    }
+    --paper-input-container-focus-color:{
+     color: lightgray;           
+    };
+    --paper-input-container-input: {
+      color: lightgray;
+    }
+    --paper-input-container-underline: {
+      color: lightgray;
+    };
+    --paper-menu-button-dropdown: {
+    position: absolute !important;
+    top: 50px !important;
+    right: 6px !important;
+    
+    };
+  }
+                    
+                      /* PHONE GRID CSS */
+
+      .input1{
+        display : inline-block;
+      }
+       #phoneinput{
+          width: 450px;
+          max-width: 450px;
+       }     
+      .input1#start1, .input1#end1{
+         display: inline-block;
+         width: 225px;
+         max-width: 225px;
+       }
+       paper-button.button1{
+        color : white;
+        background-color:#4cb050;
+        height: 40px;
+         width: 60px;
+         font-size: small;
+         margin-left: 200px;
+      }
+     .toolbar-phone{
+        height : 300px;        
+      }     
+                 
+                 
+                    /* TABLET GRID CSS  */
+
+       
+      #tabinput1{
+        padding-top: 5px;
+        width: 950px;
+        max-width: 950px;
+      }
+      #start2 {
+        width: 260px;
+        max-width: 260px;
+        /* display: inline-block; */
+      }
+      #end2 {
+        width: 260px;
+        max-width: 260px;
+      }
+      #tabinput2{
+        width: 280px;
+        max-width: 280px;
+      }
+      .input2#start2, .input2#end2, .input2#tabinput2, .button2{
+         display: inline-block;
+      }
+      .button2{
+        color: white;
+         background-color:#4cb050;
+        height: 40px;
+         width: 60px;
+         font-size: small;
+      }
+      .toolbar-tab{
+        height : 180px;
+      }
+
+
+                    /* DESKTOP GRID CSS  */
+
+      .input {
+        display: inline-block;
+        /*color: white;*/
+        font-weight: 20px;
+      }
+     #location{
+       
+        width: 400px;
+        max-width: 500px;
+      }
+      #deskinput1{
+        width : 300px;
+        max-width: 300px;
+      }
+      #start #end{
+        width : 150px;
+        max-width: 200px;
+      }
+      paper-button{
+        color : white;
+        background-color: #4cb050;
+        width: 60px;
+        height: 40px;
+        
+        font-size: small;
+      }
+       .toolbar-desktop{
+        height: 100px;
+      }
+                 
+       .my-input2 input {
+    border: none;
+    font-size: 14px;
+    background: none;
+  }
+
+
+                          /* VAADIN DATE PICKER */
+
+      .input1#end1, .input1#start1, .input2#end2, .input2#start2, .input#end, .input#start {
+          --primary-color: lightgray;
+          --dark-theme-background-color: #fff;
+          --dark-theme-secondary-color: #d0d0d0; 
+          --primary-text-color: white;
+          --secondary-text-color: lightgray;
+          --light-primary-color: #4cb050;
+          --primary-background-color:#424d51;
+                         
+      }
+      
+
+      vaadin-date-picker-toolbar {
+      background: var(--paper-grey-900);
+    }
+    
+     
+    </style>
+
+<!-- force-narrow prevents the drawer from ever being displayed in persistent mode -->
+<app-drawer-layout force-narrow>
+
+
+  <!--TOOLBAR FOR PHONE GRID-->
+
+  <app-toolbar class="toolbar-phone" hidden$="{{!PhoneGrid}}">
+    <form is="iron-form" id="form" method="post" action="/form/handler">
+
+      <paper-input class="input1" label="Enter city, airport, address or point of interest" id="phoneinput" required auto-validate
+        error-message="Enter city, airport, address or point of interest"></paper-input>
+
+      <vaadin-date-picker class="input1" id="start1" label="Check In" min="[[today]]" max="[[checkmax]]" on-keydown="keypress"
+        required auto-validate error-message="Enter check in">
+      </vaadin-date-picker>
+
+      <vaadin-date-picker class="input1" id="end1" label="Check Out" on-keydown="keypress" max="[[checkmax]]" required auto-validate
+        error-message="Enter check out">
+      </vaadin-date-picker>
+
+
+      <paper-dropdown-menu class="input1" label="1 Adult in 1 Room" id="phoneinput">
+        <paper-listbox class="dropdown-content" selected="{{choice}}">
+          <paper-item>1 Adult in 1 Room</paper-item>
+          <paper-item>2 Adults in 1 Room</paper-item>
+          <paper-item>3 Adults in 1 Room</paper-item>
+          <paper-item>4 Adults in 1 Room</paper-item>
+          <paper-item>2 Adults in 2 Rooms</paper-item>
+          <paper-item on-tap="openChildForm"><a href="choice-card-link.html" target="childrenForm">Need more Rooms or have Children</a></paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <input is="iron-input" type="hidden" bind-value="[[choice]]">
+
+      <paper-button class="button1" toggles on-tap="submitPhoneInput">Search</paper-button>
+
+    </form>
+
+  </app-toolbar>
+
+  <app-header-layout>
+    <app-header><span></span><br>
+
+    </app-header>
+
+    <!--TOOLBAR FOR TABLET GRID-->
+
+    <app-toolbar hidden$="{{!TabGrid}}" class="toolbar-tab">
+      <form is="iron-form" id="form" method="post" action="/form/handler">
+
+        <paper-input class="input2" label="Enter city, airport, address or point of interest" id="tabinput1" required auto-validate
+          error-message="Enter city, airport, address or point of interest"></paper-input>
+
+        <vaadin-date-picker class="input2" id="start2" label="Check In" min="[[today]]" on-keydown="keypress" max="[[checkmax]]"
+          required auto-validate error-message="Enter check in">
+        </vaadin-date-picker>
+
+        <vaadin-date-picker class="input2" id="end2" label="Check Out" on-keydown="keypress" max="[[checkmax]]" required auto-validate
+          error-message="Enter check out">
+        </vaadin-date-picker>
+
+
+        <paper-dropdown-menu class="input2" label="1 Adult in 1 Room" id="tabinput2">
+          <paper-listbox class="dropdown-content" selected="{{choice}}">
+            <paper-item>1 Adult in 1 Room</paper-item>
+            <paper-item>2 Adults in 1 Room</paper-item>
+            <paper-item>3 Adults in 1 Room</paper-item>
+            <paper-item>4 Adults in 1 Room</paper-item>
+            <paper-item>2 Adults in 2 Rooms</paper-item>
+            <paper-item on-tap="openChildForm"><a href="choice-card-link.html" target="childrenForm">Need more Rooms or have Children</a></paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+        <input is="iron-input" type="hidden" bind-value="[[choice]]">
+
+        <paper-button toggles on-tap="submitTabletInput" class=button2>Search</paper-button>
+
+      </form>
+
+    </app-toolbar>
+
+    <!--TOOLBAR FOR DESKTOP GRID-->
+
+    <app-toolbar hidden$="{{!DesktopGrid}}" class="toolbar-desktop">
+      <form is="iron-form" id="form" method="post" action="/form/handler">
+
+        <!--<paper-input class="input" label="Enter city, airport, address or point of interest" id="deskinput" required auto-validate error-message="Enter city, airport, address or point of interest"></paper-input>-->
+                         <div class="suggest" style="width:400px;height: 40px;">
+                           <template is="dom-bind" class="input">
+                              <t-mystique-auth name="mystique" url="http://demo.travelnxt.com/api/authentication/authenticate/context" token-response="{{tokenResponse}}"
+                                auto>
+                              </t-mystique-auth>
+  
+                              <t-autosuggest id="location" name="location" required selected-item="{{location}}" query-params="token={{tokenResponse.authenticationToken}}"
+                                 label="Enter city, airport, address or point of interest" token-param="formattedAddress" data-url="http://demo.travelnxt.com/api/content/autosuggest/" error-message=" you miss this"></t-autosuggest>
+
+                           </template>
+                          </div>
+
+<vaadin-date-picker class="input" id="start" label="Check In" required min="[[today]]" max="[[checkmax]]" on-keydown="keypress"
+  required auto-validate error-message="Enter check in">
+
+</vaadin-date-picker>
+
+<vaadin-date-picker class="input" id="end" label="Check Out" required on-keydown="keypress" max="[[checkmax]]" required auto-validate
+  error-message="Enter check out">
+
+</vaadin-date-picker>
+
+<paper-dropdown-menu class="input" label="1 Adult in 1 Room" id="deskinput1">
+  <paper-listbox class="dropdown-content" selected="{{choice}}">
+    <paper-item>1 Adult in 1 Room</paper-item>
+    <paper-item>2 Adults in 1 Room</paper-item>
+    <paper-item>3 Adults in 1 Room</paper-item>
+    <paper-item>4 Adults in 1 Room</paper-item>
+    <paper-item>2 Adults in 2 Rooms</paper-item>
+    <paper-item on-tap="openChildForm"><a href="choice-card-link.html" target="childrenForm"> Need more Rooms or have Children</a></paper-item>
+  </paper-listbox>
+</paper-dropdown-menu>
+<input is="iron-input" type="hidden" bind-value="[[choice]]">
+
+<paper-button toggles on-tap="submitDesktopInput" class=button>Search</paper-button>
+
+</form>
+
+
+</app-toolbar>
+
+
+
+
+<paper-card hidden$="{{show}}">
+  <iframe name="childrenForm" width="500" height="400" style="border: none"></iframe>
+</paper-card>
+
+
+
+</app-header-layout>
+
+</app-drawer-layout>
+
+<!--resizing the window-->
+<iron-media-query query="(max-width:600px)" query-matches="{{PhoneGrid}}"></iron-media-query>
+<iron-media-query query="(min-width:1025px)" query-matches="{{DesktopGrid}}"></iron-media-query>
+<iron-media-query query="(min-width:600px) and (max-width: 1025px)" query-matches="{{TabGrid}}"></iron-media-query>
+
+</template>
+
+<script>
+  Polymer({
+    is: 'wt-search',
+    properties: {
+      PhoneGrid: {
+        type: Boolean,
+        value: false,
+        //observer: 'Phone_grid',
+      },
+
+      DesktopGrid: {
+        type: Boolean,
+        value: false,
+      },
+
+      TabGrid: {
+        type: Boolean,
+        value: false,
+      },
+      show: {
+        type: Boolean,
+        value: true
+      },
+      today: {
+        value: function () {
+          return new Date().toISOString().substring(0, 10);
+        }
+      },
+      choice: {
+        type: String,
+        value: '1 Adult in 1 Room'
+      },
+
+      checkmax: {
+        value: function () {
+          var x = 12; //or whatever offset
+          var CurrentDate = new Date();
+          CurrentDate.setMonth(CurrentDate.getMonth() + x);
+          return CurrentDate.toISOString().substring(0, 10);
+        }
+      },
+    },
+
+
+    keypress: function (event) {
+      event.preventDefault();
+    },
+    openChildForm: function () {
+      this.show = !this.show
+    },
+
+
+    submitDesktopInput: function () {
+      var input = document.getElementsByClassName("input");
+      var data = [];
+      for (var i = 0; i < input.length; i++) { // loop through each input on the page
+        data[i] = input[i].value;
+      }
+      if (data[0] == "") {
+        //show error
+        this.$.deskinput.invalid = true;
+        this.$.start.invalid = true;
+        this.$.end.invalid = true;
+      }
+      else if (data[1] == "") {
+        this.$.start.invalid = true;
+        this.$.end.invalid = true;
+      }
+      else if (data[2] == "") {
+        this.$.end.invalid = true;
+      }
+      else {
+        var myJSON = JSON.stringify(data);
+        alert(myJSON); // will alert the value of the input
+        console.log(myJSON);
+        return false;  // stop form from posting
+      }
+    },
+    submitPhoneInput: function () {
+      var input1 = document.getElementsByClassName("input1");
+      var data = [];
+      for (var i = 0; i < input1.length; i++) { // loop through each input on the page
+        data[i] = input1[i].value;
+      }
+      if (data[0] == "") {
+        //show error
+        this.$.deskinput.invalid = true;
+      }
+      else if (data[1] == "") {
+        this.$.start.invalid = true;
+        this.$.end.invalid = true;
+      }
+      else {
+        var myJSON = JSON.stringify(data);
+        alert(myJSON); // will alert the value of the input
+        console.log(myJSON);
+        return false;  // stop form from posting
+      }
+    },
+    submitTabletInput: function () {
+      var input2 = document.getElementsByClassName("input2");
+      var data = [];
+      for (var i = 0; i < input2.length; i++) { // loop through each input on the page
+        data[i] = input2[i].value;
+      }
+      if (data[0] == "") {
+        //show error
+        this.$.deskinput.invalid = true;
+      }
+      else if (data[1] == "") {
+        this.$.start.invalid = true;
+        this.$.end.invalid = true;
+      }
+      else {
+        var myJSON = JSON.stringify(data);
+        alert(myJSON); // will alert the value of the input
+        console.log(myJSON);
+        return false;  // stop form from posting
+      }
+    },
+
+
+
+    ready: function () {
+
+      var start = document.querySelector('#start');
+      var end = document.querySelector('#end');
+      var x = 6;
+      var CurrentDate;
+      start.addEventListener('value-changed', function () {
+        // Open the end date picker with a delay to
+        // make it less confusing.
+        window.setTimeout(function () {
+          end.min = start.value;
+          CurrentDate = new Date(start.value);
+          CurrentDate.setDate(CurrentDate.getDate() + x);
+          end.initialPosition = CurrentDate.toISOString().substring(0, 10);
+          end.open();
+        }, 500);
+      });
+
+      var start1 = document.querySelector('#start1');
+      var end1 = document.querySelector('#end1');
+      var x = 6;
+      var CurrentDate;
+      start1.addEventListener('value-changed', function () {
+        // Open the end date picker with a delay to
+        // make it less confusing.
+        window.setTimeout(function () {
+          end1.min = start1.value;
+          CurrentDate = new Date(start1.value);
+          CurrentDate.setDate(CurrentDate.getDate() + x);
+          end1.initialPosition = CurrentDate.toISOString().substring(0, 10);
+          end1.open();
+        }, 500);
+      });
+
+      var start2 = document.querySelector('#start2');
+      var end2 = document.querySelector('#end2');
+      var x = 6;
+      var CurrentDate;
+      start2.addEventListener('value-changed', function () {
+        // Open the end date picker with a delay to
+        // make it less confusing.
+        window.setTimeout(function () {
+          end2.min = start2.value;
+          CurrentDate = new Date(start2.value);
+          CurrentDate.setDate(CurrentDate.getDate() + x);
+          end2.initialPosition = CurrentDate.toISOString().substring(0, 10);
+          end2.open();
+        }, 500);
+      });
+
+    },
+
+
+    collectData: function (event) {
+      event.preventDeafult();
+      var data = $(this).attr('href')
+      console.log($.parseJSON(response));
+      //  alert
+    }
+
+  });
+</script>
+</dom-module>
